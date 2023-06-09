@@ -7,7 +7,7 @@ import "./App.css";
 import "./index.css";
 
 export default function App() {
-  const productArray = getAllPruducts()
+  const productArray = getAllPruducts();
 
   return (
     <>
@@ -32,18 +32,24 @@ export default function App() {
       </header>
 
       <main>
-        <ul className="productList">
-          {productArray.map((product) => {
-            return (
-              <li key={product.slug} className="border">
-                <ProductCard className="coral" {...product} />
-              </li>
-            );
-          })}
-        </ul>
+        <ArticleList articles={productArray} />
       </main>
 
       <footer>&copy; Lars Gunnar</footer>
     </>
   );
+}
+
+export function ArticleList(props) {
+  // Do logic stuff in top section
+  const { articles, className } = props;
+
+  const listOfArticles = articles.map((article) => (
+    <li key={article.slug}>
+      <ProductCard {...article} />
+    </li>
+  ));
+
+  // Try to keep return free of JavaScript
+  return <ul id="article-container">{listOfArticles}</ul>;
 }
