@@ -1,25 +1,14 @@
+import { FillText } from "./components/FillText/FillText";
 import { ProductCard } from "./components/ProductCard/ProductCard";
+
+import { getAllPruducts } from "./data/productOperation";
 
 import "./App.css";
 import "./index.css";
-import { FillText } from "./components/FillText/FillText";
-
-
-const productArray = [
-  {
-    productName: "MacBook Air 15",
-    imageSrc: "https://www.komplett.no/img/p/300/1247226.jpg",
-    price: 19490,
-  },
-  {
-    productName: "MacBook Air 14",
-    imageSrc: "https://www.komplett.no/img/p/300/1247229.jpg",
-    price: 14490,
-  }
-]
-
 
 export default function App() {
+  const productArray = getAllPruducts()
+
   return (
     <>
       <header>
@@ -29,26 +18,32 @@ export default function App() {
 
         <nav>
           <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Products</a></li>
-            <li><a href="">Contact</a></li>
+            <li>
+              <a href="">Home</a>
+            </li>
+            <li>
+              <a href="">Products</a>
+            </li>
+            <li>
+              <a href="">Contact</a>
+            </li>
           </ul>
         </nav>
       </header>
 
       <main>
-        <ProductCard
-          productName={productArray[0].productName}
-          imageSrc={productArray[0].imageSrc}
-          price={productArray[0].price}
-        />
-
-        <ProductCard {...productArray[1]}/>
+        <ul className="productList">
+          {productArray.map((product) => {
+            return (
+              <li key={product.slug} className="border">
+                <ProductCard className="coral" {...product} />
+              </li>
+            );
+          })}
+        </ul>
       </main>
 
-      <footer>
-        &copy; Lars Gunnar
-      </footer>
+      <footer>&copy; Lars Gunnar</footer>
     </>
   );
 }

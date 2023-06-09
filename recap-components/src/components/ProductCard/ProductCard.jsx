@@ -1,12 +1,10 @@
+import './style.css'
+
 export function ProductCard(props) {
-  console.log(props)
-
-  const { productName, imageSrc, price } = props
-
-  
+  const { productName, imageSrc, price, className } = props
 
   return (
-    <div>
+    <div className={`ProductCard ${className}`} >
       <img src={imageSrc} alt="" />
       <h1>{productName}</h1>
       <h2>{price}</h2>
